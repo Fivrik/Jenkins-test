@@ -1,32 +1,30 @@
-// Jenkinsfile (Declarative Pipeline)
 pipeline {
-  agent any // run on any available agent
+  agent any
   stages {
-    stage('Install Maven') { // a stage for installing Maven
+    stage('Install Maven') {
       steps {
-        script {
-          def mvnHome = tool name: 'apache-maven-3.6.1', type: 'maven' // get the Maven installation path
-          env.PATH = "${mvnHome}/bin:${env.PATH}" // add Maven to the PATH environment variable
-        }
+        echo 'build'
       }
     }
-    stage('Build') { // a stage for building the project
+
+    stage('Build') {
       steps {
-        echo 'Building...' // print a message
-        sh 'mvn clean package' // run a shell command to build with Maven
+        echo 'Building...'
       }
     }
-    stage('Test') { // a stage for testing the project
+
+    stage('Test') {
       steps {
-        echo 'Testing...' // print a message
-        sh 'mvn test' // run a shell command to test with Maven
+        echo 'Testing...'
+        sh 'mvn test'
       }
     }
-    stage('Deploy') { // a stage for deploying the project
+
+    stage('Deploy') {
       steps {
-        echo 'Deploying...' // print a message
-        sh 'mvn deploy' // run a shell command to deploy with Maven
+        echo 'Deploying...'
       }
     }
+
   }
 }
