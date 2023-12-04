@@ -2,6 +2,14 @@
 pipeline {
   agent any // run on any available agent
   stages {
+    stage('Install Maven') { // a stage for installing Maven
+      steps {
+        script {
+          def mvnHome = tool name: 'apache-maven-3.6.1', type: 'maven' // get the Maven installation path
+          env.PATH = "${mvnHome}/bin:${env.PATH}" // add Maven to the PATH environment variable
+        }
+      }
+    }
     stage('Build') { // a stage for building the project
       steps {
         echo 'Building...' // print a message
